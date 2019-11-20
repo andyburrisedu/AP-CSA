@@ -1,3 +1,0 @@
-program < file: Redirect standard input from file
-program > file: Redirect standard output to file
-program1 | program2: Pipe output from program1 to program2

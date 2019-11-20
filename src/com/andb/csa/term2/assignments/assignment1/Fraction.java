@@ -13,18 +13,37 @@ public class Fraction {
         this.denominator = Math.max(d, 1);
     }
 
-    void add(int n, int d) {
+    public void add(int n, int d) {
+        if (n < 0 || d < 0) {
+            return;
+        }
 
+        int lcd = denominator * d;
+        int newNum1 = n * denominator;
+        int newNum2 = numerator * d;
+        n = newNum1 + newNum2;
+        d = lcd;
     }
 
-    String mixedNumber() {
+    public String mixedNumber() {
         int whole = numerator / denominator;
         int remainder = numerator % denominator;
-        return whole + " " + remainder + "/" + denominator;
+        String out = "";
+        if (whole != 0) {
+            out += whole + " ";
+        }
+        if (remainder != 0) {
+            out += fractionString(remainder, denominator);
+        }
+        return out;
+    }
+
+    private static String fractionString(int n, int d) {
+        return n + "/" + d;
     }
 
     @Override
     public String toString() {
-        return numerator + "/" + denominator;
+        return fractionString(numerator, denominator);
     }
 }
