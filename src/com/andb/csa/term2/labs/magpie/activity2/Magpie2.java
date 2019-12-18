@@ -64,7 +64,7 @@ public class Magpie2 {
      * @return a non-committal string
      */
     private String getRandomResponse() {
-        final int NUMBER_OF_RESPONSES = 4;
+        final int NUMBER_OF_RESPONSES = 5;
         double r = Math.random();
         int whichResponse = (int) (r * NUMBER_OF_RESPONSES);
         String response = "";
@@ -72,14 +72,19 @@ public class Magpie2 {
         switch (whichResponse) {
             case 0:
                 response = "Interesting, tell me more.";
+                break;
             case 1:
                 response = "Hmmm.";
+                break;
             case 2:
                 response = "Do you really think so?";
+                break;
             case 3:
                 response = "You don't say.";
+                break;
             case 4:
                 response = "Keep going...";
+                break;
             case 5:
                 response = "Huh.";
         }

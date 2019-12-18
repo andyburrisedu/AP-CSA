@@ -11,8 +11,28 @@ public class Utils {
         return new Color(r, g, b);
     }
 
-    public static int random(int min, int max) {
-        return (int) (Math.random() * (max - min + 1) + min);
+    /**
+     * Calculates random integer within a range
+     *
+     * @param baseInclusive    Bottom of random range (possible to be a returned value)
+     * @param ceilingExclusive Top of random range (can't be a returned value)
+     * @return Random integer in range
+     */
+    public static int random(int baseInclusive, int ceilingExclusive) {
+        int range = ceilingExclusive - baseInclusive;
+        return (int) (Math.random() * range + baseInclusive);
+    }
+
+    /**
+     * Calculates random double within a range
+     *
+     * @param baseInclusive    Bottom of random range (possible to be a returned value)
+     * @param ceilingExclusive Top of random range (can't be a returned value)
+     * @return Random double in range
+     */
+    public static double random(double baseInclusive, double ceilingExclusive) {
+        double range = ceilingExclusive - baseInclusive;
+        return (Math.random() * range + baseInclusive);
     }
 
     public static int coerce(int value, int minInclusive, int maxInclusive) {

@@ -73,8 +73,7 @@ public class Magpie3 {
         String phrase = statement.trim();
         // The only change to incorporate the startPos is in
         // the line below
-        int psn = phrase.toLowerCase().indexOf(
-                goal.toLowerCase(), startPos);
+        int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
 
         // Refinement--make sure the goal isn't part of a
         // word
@@ -83,8 +82,7 @@ public class Magpie3 {
             // the word
             String before = " ", after = " ";
             if (psn > 0) {
-                before = phrase.substring(psn - 1, psn)
-                        .toLowerCase();
+                before = phrase.substring(psn - 1, psn).toLowerCase();
             }
             if (psn + goal.length() < phrase.length()) {
                 after = phrase.substring(

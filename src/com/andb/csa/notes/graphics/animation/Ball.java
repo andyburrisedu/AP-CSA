@@ -4,18 +4,23 @@ import java.awt.*;
 
 public class Ball {
 
-    public static final double GRAVITY = -9.32 / 1000;
+    public static final double GRAVITY = -9.32E-4;
+    public static final double BOUNCE_FRICTION_DIRECT = .8;
+    public static final double BOUNCE_FRICTION_INDIRECT = .95;
+    //public static final double GRAVITY = -1E-4;
 
     private double x;
     private double y;
-    private int direction;
+    private double xVel;
+    private double yVel;
     private double radius;
     private Color color;
 
     public Ball(double x, double y, int direction, double radius, Color color) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.xVel = (Math.cos(Math.toRadians(direction))) / 100;
+        this.yVel = (Math.sin(Math.toRadians(direction))) / 100;
         this.radius = radius;
         this.color = color;
     }
@@ -36,16 +41,12 @@ public class Ball {
         this.y = y;
     }
 
-    public int getDirection() {
-        return direction;
-    }
-
     public double getXVel() {
-        return (Math.cos(Math.toRadians(direction))) / 1000;
+        return xVel;
     }
 
     public double getYVel() {
-        return (Math.sin(Math.toRadians(direction))) / 1000;
+        return yVel;
     }
 
     public double getRadius() {
@@ -79,10 +80,26 @@ public class Ball {
     }
 
     public void bounceX() {
-        direction = 180 - direction;
+        if (x + radius >= 1.0) {
+            x = 1.0 - radius;
+        } else if (x - radius <= 0.0) {
+            x = radius;
+        }
+        xVel = -xVel * BOUNCE_FRICTION_DIRECT;
+        yVel = yVel * BOUNCE_FRICTION_INDIRECT;
     }
 
     public void bounceY() {
-        direction = 360 - direction;
+        if (y + radius >= 1.0) {
+            y = 1.0 - radius;
+        } else if (y - radius <= 0.0) {
+            y = radius;
+        }
+        yVel = -yVel * BOUNCE_FRICTION_DIRECT;
+        xVel = xVel * BOUNCE_FRICTION_INDIRECT;
+    }
+
+    public void updateGravity() {
+        yVel += GRAVITY;
     }
 }
