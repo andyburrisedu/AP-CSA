@@ -1,5 +1,7 @@
 package com.andb.csa.term2.labs.steganography;
 
+import java.awt.*;
+
 public class SteganographyUtils {
     static int clearLastTwoBits(int original) {
         return roundDownToMultiple(original, 4);
@@ -23,5 +25,20 @@ public class SteganographyUtils {
 
     static int getLastTwoBits(int original) {
         return original % 4;
+    }
+
+    public static void main(String[] args) {
+        Color source = new Color(234, 172, 92);
+        Color secret = new Color(120, 34, 196);
+        Color combined = new Color(
+                setLastTwoBits(source.getRed(), getFirstTwoBits(secret.getRed())),
+                setLastTwoBits(source.getGreen(), getFirstTwoBits(secret.getGreen())),
+                setLastTwoBits(source.getBlue(), getFirstTwoBits(secret.getBlue()))
+        );
+        System.out.println(combined);
+        System.out.println(bringLastTwoBitsToFront(combined.getRed()));
+        System.out.println(bringLastTwoBitsToFront(combined.getGreen()));
+        System.out.println(bringLastTwoBitsToFront(combined.getBlue()));
+
     }
 }
