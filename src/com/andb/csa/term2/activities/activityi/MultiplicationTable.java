@@ -17,5 +17,4 @@ public class MultiplicationTable {
         String out = Arrays.deepToString(multTable(6, 4)).replace("], ", "]\n");
         System.out.println(out);
     }
-
 }
