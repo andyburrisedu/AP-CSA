@@ -45,6 +45,14 @@ public class Coordinate {
     }
 
     @Override
+    public String toString() {
+        return "Coordinate{" +
+                "row=" + row +
+                ", column=" + column +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

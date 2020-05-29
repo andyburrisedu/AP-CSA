@@ -2,9 +2,11 @@ package com.andb.csa.notes.maze;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MazeDrawer extends JPanel {
     private PerfectMaze maze;
+    private MazeSolver mazeSolver;
 
     public int roomWidth() { return this.getWidth() / maze.columns();}
 
@@ -14,11 +16,19 @@ public class MazeDrawer extends JPanel {
         this.maze = maze;
     }
 
+    public MazeDrawer(PerfectMaze maze, MazeSolver mazeSolver) {
+        this.maze = maze;
+        this.mazeSolver = mazeSolver;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
         paintRooms((Graphics2D) g);
+        if (mazeSolver != null) {
+            paintSolution((Graphics2D) g);
+        }
         paintWalls((Graphics2D) g);
     }
 
@@ -47,10 +57,22 @@ public class MazeDrawer extends JPanel {
         }
     }
 
+    private void paintSolution(Graphics2D g) {
+        List<Coordinate> path = mazeSolver.getSolvePath();
+        Color color = new Color(Utils.colorFromID(maze.roomIDs[0][0])).darker().darker();
+        //color = Color.WHITE;
+        g.setColor(color);
+        for (Coordinate coordinate : path) {
+            g.fillRect(coordinate.getColumn() * roomWidth(), coordinate.getRow() * roomHeight(), roomWidth(), roomHeight());
+        }
+    }
+
     public static void main(String[] args) {
-        PerfectMaze maze = new PerfectMaze(10, 10);
+        PerfectMaze maze = new PerfectMaze(100, 100);
+        MazeSolver solver = new MazeSolver(maze);
+        //System.out.println(solver.getSolvePath());
         JFrame frame = new JFrame();
-        MazeDrawer drawer = new MazeDrawer(maze);
+        MazeDrawer drawer = new MazeDrawer(maze, solver);
         frame.add(drawer);
         frame.setSize(800, 800);
         frame.setTitle("Maze Generator");

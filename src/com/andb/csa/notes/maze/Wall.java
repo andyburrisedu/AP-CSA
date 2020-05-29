@@ -23,8 +23,9 @@ public class Wall {
     public String toString() {
         return "Wall{" +
                 "type=" + type +
-                ", firstRoom=" + firstRoom +
-                ", secondRoom=" + secondRoom +
+                ", firstRoom = " + firstRoom +
+                ", secondRoom = " + secondRoom +
+                ", isHorizontal = " + isHorizontal() +
                 '}';
     }
 }
